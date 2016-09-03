@@ -3,10 +3,17 @@
 #==============================================
 
 # load libraries and source HAL functions
+library(SuperLearner)
+library(caret)
+library(np)
+library(RCurl)
 
+# source HAL functions
+eval(parse(text=getURL(paste0("https://raw.githubusercontent.com/benkeser/",
+                              "hal/master/healthcosts.R"))))
 
 # define the SuperLearner library
-SL.library <- c("SL.svnnet",
+SL.library <- c("SL.hal",
                 "SL.caret.rf",
                 "SL.caret.gamSpline",
                 "SL.caret.gbm",
@@ -24,8 +31,10 @@ outList <- vector(mode="list",length=5)
 ct <- 0
 for(datName in c("cpu","laheart","oecdpanel","pima","fev")){
   ct <- ct + 1
-  # read data
-  # dat <- read.table()
+  # read data from github
+  datUrl <- getURL(paste0("https://raw.githubusercontent.com/benkeser/",
+                          "hal/Data%20Analyis/",dataName,".csv"))
+  dat <- read.csv(textConnection(datUrl),header=TRUE)
   
   # fit cross-validated super learner
   # each data set is arranged so that the outcome is in the first column
