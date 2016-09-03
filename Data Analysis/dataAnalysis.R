@@ -33,7 +33,7 @@ for(datName in c("cpu","laheart","oecdpanel","pima","fev")){
   ct <- ct + 1
   # read data from github
   datUrl <- getURL(paste0("https://raw.githubusercontent.com/benkeser/",
-                          "hal/Data%20Analyis/",dataName,".csv"))
+                          "hal/master/Data%20Analysis/",datName,".csv"))
   dat <- read.csv(textConnection(datUrl),header=TRUE)
   
   # fit cross-validated super learner
