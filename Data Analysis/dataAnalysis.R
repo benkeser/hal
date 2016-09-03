@@ -10,7 +10,12 @@ library(RCurl)
 
 # source HAL functions
 eval(parse(text=getURL(paste0("https://raw.githubusercontent.com/benkeser/",
-                              "hal/master/healthcosts.R"))))
+                              "hal/master/halFunctions.R"))))
+# source other SL functions
+eval(parse(text=getURL(paste0("https://raw.githubusercontent.com/benkeser/",
+                              "hal/master/Simulation/otherSLFunctions.R")))
+     )
+
 
 # define the SuperLearner library
 SL.library <- c("SL.hal",
